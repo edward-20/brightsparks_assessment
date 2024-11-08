@@ -2,14 +2,14 @@
 Test that the top n list has the correct behaviour after adding elements to the list
 '''
 
-import cli.top_n_list
+from cli.top_n_list import TopNList
 
 def test_add_one(alphabet_ordering_wrt_division_and_points):
     '''
     top one list can handle adding one record
     '''
     a, *_ = alphabet_ordering_wrt_division_and_points
-    list_of_one = cli.top_n_list.TopNList(1)
+    list_of_one = TopNList(1)
     assert list_of_one._ordered_list.capacity == 1
     list_of_one.add(a)
     assert list_of_one._ordered_list.len == 1
@@ -20,7 +20,7 @@ def test_add_two(alphabet_ordering_wrt_division_and_points):
     top two list can handle adding two records
     '''
     a, b, *_ = alphabet_ordering_wrt_division_and_points
-    our_list = cli.top_n_list.TopNList(2)
+    our_list = TopNList(2)
     assert our_list._ordered_list.capacity == 2
     our_list.add(a)
     assert our_list._ordered_list.head.data.same(a)
@@ -34,7 +34,7 @@ def test_add_three(alphabet_ordering_wrt_division_and_points):
     top three list can handle adding three records
     '''
     a, b, c, *_ = alphabet_ordering_wrt_division_and_points
-    our_list = cli.top_n_list.TopNList(3)
+    our_list = TopNList(3)
     assert our_list._ordered_list.capacity == 3
     our_list.add(a)
     assert our_list._ordered_list.len == 1
@@ -53,7 +53,7 @@ def test_add_three_in_unsorted_order(alphabet_ordering_wrt_division_and_points):
     top three list adds three records and the records are not added in order
     '''
     a, b, c, *_ = alphabet_ordering_wrt_division_and_points
-    our_list = cli.top_n_list.TopNList(3)
+    our_list = TopNList(3)
     assert our_list._ordered_list.capacity == 3
     our_list.add(b)
     our_list.add(a)
@@ -72,7 +72,7 @@ def test_add_many_with_capacity_three(alphabet_ordering_wrt_division_and_points)
     continually displace existing elements
     '''
     a, b, c, d, e, f = alphabet_ordering_wrt_division_and_points
-    our_list = cli.top_n_list.TopNList(3)
+    our_list = TopNList(3)
 
     our_list.add(f)
     our_list.add(e)
@@ -124,7 +124,7 @@ def test_add_many_with_capacity_three_sorting_by_alternative(alphabet_ordering_w
     we will sort by last name and then division
     '''
     a, b, c, d, e, f, g = alphabet_ordering_wrt_last_name_and_division
-    our_list = cli.top_n_list.TopNList(3)
+    our_list = TopNList(3)
 
     our_list.add(f)
     our_list.add(e)
@@ -167,3 +167,20 @@ def test_add_many_with_capacity_three_sorting_by_alternative(alphabet_ordering_w
     assert our_list._ordered_list.tail.data.same(c)
     assert our_list._ordered_list.tail.prev.data.same(b)
     assert our_list._ordered_list.tail.prev.prev.data.same(a)
+
+def test_iteration(alphabet_ordering_wrt_last_name_and_division):
+    '''
+    test that the process of converting an TopNList to a List works
+    '''
+    a, b, c, d, e, f, g = alphabet_ordering_wrt_last_name_and_division
+    our_list = TopNList(7)
+    our_list.add(a)
+    our_list.add(b)
+    our_list.add(c)
+    our_list.add(d)
+    our_list.add(e)
+    our_list.add(f)
+    our_list.add(g)
+    
+    new_list = list(our_list)
+    assert new_list == [a, b, c, d, e, f, g]

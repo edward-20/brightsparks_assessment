@@ -25,11 +25,11 @@ def main():
     # how many individuals you want to output, default is 3
     parser.add_argument('-c', '--count', help="the number of records you want to output", default=3)
     # sort by alternative field than division and points
-    parser.add_argument('-s', '--sort-by', action="append", choices=['firstName', 'lastName', 'date', 'division', 'points'],
+    parser.add_argument('-s', '--sort-by', action="append", choices=['firstname', 'lastname', 'date', 'division', 'points'],
                         help='''
                         choose an alternative way to sort the records. Options include
-                        - firstName
-                        - lastName
+                        - firstname
+                        - lastname
                         - date
                         - division
                         - points
@@ -40,9 +40,9 @@ def main():
                         order in which you specify the arguments matters
 
                         Example:
-                        python3 main.py -s firstName -s lastName file.csv
+                        python3 main.py -s firstname -s lastname file.csv
 
-                        would mean that the records would be sorted by firstName and in the event of equality, sort by lastName
+                        would mean that the records would be sorted by firstName and in the event of equality, sort by lastname
                         ''',
                         )
     args = parser.parse_args()
@@ -52,6 +52,7 @@ def main():
     if not sort_by:
         sort_by = ["division", "points"]
     Record.sort_by = sort_by
+    print(f"sorting by {Record.sort_by}")
 
     
     # retains top records as python dictionaries in order from greatest to lowest
@@ -74,11 +75,13 @@ def main():
                 print(parsed_record)
                     
                 top_parsed_records.add(parsed_record)
+                print(top_parsed_records)
 
             except (InadequateColumnsInCSVRecordException, InvalidDataToCreateRecordException) as e:
                 print(f'An error occurred: {e}')
 
     # output as yaml
+    print(top_parsed_records)
     top_parsed_records = list(top_parsed_records)
 
 if __name__ == "__main__":

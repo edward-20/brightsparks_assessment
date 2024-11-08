@@ -17,11 +17,6 @@ class _Node:
         self.next : Union[_Node, None] = None
         self.prev : Union[_Node, None] = None
 
-    def __next__(self):
-        if self.next is None:
-            raise StopIteration
-        return self.next
-
 class TopNList:
     '''
     Keeps a list of the top n elements. Adding to it either accomodates for the
@@ -94,4 +89,13 @@ class TopNList:
         return result
 
     def __iter__(self):
-        return self._ordered_list.head
+        self._current = self._ordered_list.head
+        return self
+
+    def __next__(self):
+        if self._current is None:
+            raise StopIteration
+        else:
+            value = self._current.data
+            self._current = self._current.next
+            return value

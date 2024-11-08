@@ -24,6 +24,7 @@ records:
   details: In division from performing
 ```
 
+## How to use cli tool
 ## Example
 
 Input file:
@@ -80,3 +81,5 @@ Libraries:
 
 Test Runner:
 `pytest`
+
+# Instructions to convert python script into shell command

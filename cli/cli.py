@@ -5,7 +5,7 @@ CLI Tool main
 import argparse
 from cli.csv_parse import parse_header, parse_record, InadequateColumnsInCSVRecordException, IncorrectHeadersInCSVException
 from cli.record import InvalidDataToCreateRecordException, Record
-import cli.top_n_list import TopNList
+from cli.top_n_list import TopNList
 
 def main():
     '''
@@ -48,9 +48,10 @@ def main():
     args = parser.parse_args()
 
     filename = args.filename
+    sort_by = args.sort_by
     if not sort_by:
         sort_by = ["division", "points"]
-    Record.sort_by = args.sort_by
+    Record.sort_by = sort_by
 
     
     # retains top records as python dictionaries in order from greatest to lowest
@@ -78,6 +79,7 @@ def main():
                 print(f'An error occurred: {e}')
 
     # output as yaml
+    top_parsed_records = list(top_parsed_records)
 
 if __name__ == "__main__":
     main()

@@ -17,6 +17,11 @@ class _Node:
         self.next : Union[_Node, None] = None
         self.prev : Union[_Node, None] = None
 
+    def __next__(self):
+        if self.next is None:
+            raise StopIteration
+        return self.next
+
 class TopNList:
     '''
     Keeps a list of the top n elements. Adding to it either accomodates for the
@@ -37,19 +42,12 @@ class TopNList:
             return
 
         runner = self._ordered_list.tail
-        print("starting add, this is state of list ", self)
         # find the insertion site
         # invariant after this loop: runner will be the node s.t. runner.data > new_record but runner.next.data is not
         # and if there is no such node (new_record is greater than all existing records) then runner is None
         while runner is not None and new_record > runner.data:
-            print(f"{new_record._firstname} is greater than {runner.data._firstname} so before it")
             runner = runner.prev
         
-        if runner is None:
-            print("insertion site is before head")
-        else:
-            print(f"insertion site is {runner.data._firstname} for {new_record._firstname}")
-
         new_node = _Node(new_record)
         if runner is None:
             # make new head and connect it to the previous linked list
@@ -94,3 +92,6 @@ class TopNList:
             result += f"{runner.data._firstname}, {runner.data._lastname} -> "
             runner = runner.next
         return result
+
+    def __iter__(self):
+        return self._ordered_list.head

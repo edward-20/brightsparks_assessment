@@ -3,6 +3,8 @@ Module for the python representation of records
 '''
 
 from datetime import datetime
+from functools import total_ordering
+
 def _verify_points(points):
     return points.isdigit()
 
@@ -14,6 +16,7 @@ class InvalidDataToCreateRecordException(Exception):
     A custom exception for the event that the csv file has an incorrect record.
     '''
 
+@total_ordering
 class Record:
     '''
     Class representing a record
@@ -75,6 +78,7 @@ class Record:
 
         # check sort_by is valid
         for field in Record.sort_by:
+            # Remove redundant continues
             match field:
                 case "firstname":
                     if other._firstname == self._firstname:
@@ -102,6 +106,26 @@ class Record:
                     else:
                         return self._points > other._points
         return False
+
+    def __eq__(self, value: "Record") -> bool:
+        for field in Record.sort_by:
+            match field:
+                case "firstname":
+                    if value._firstname != self._firstname:
+                        return False
+                case "lastname":
+                    if value._lastname != self._lastname:
+                        return False
+                case "date":
+                    if value._date != self._date:
+                        return False
+                case "division":
+                    if value._division != self._division:
+                        return False
+                case "points":
+                    if value._points != self._points:
+                        return False
+        return True
 
     def same(self, value: "Record") -> bool:
         '''

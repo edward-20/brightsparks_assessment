@@ -3,9 +3,11 @@ CLI Tool main
 '''
 
 import argparse
-from cli.csv_parse import parse_header, parse_record, InadequateColumnsInCSVRecordException, IncorrectHeadersInCSVException
+from cli.csv_parse import parse_header, parse_record, \
+      InadequateColumnsInCSVRecordException, IncorrectHeadersInCSVException
 from cli.record import InvalidDataToCreateRecordException, Record
 from cli.top_n_list import TopNList
+import yaml
 
 def main():
     '''
@@ -52,7 +54,6 @@ def main():
     if not sort_by:
         sort_by = ["division", "points"]
     Record.sort_by = sort_by
-    print(f"sorting by {Record.sort_by}")
 
     
     # retains top records as python dictionaries in order from greatest to lowest
@@ -72,17 +73,17 @@ def main():
         for line in file:
             try:
                 parsed_record = parse_record(headers, line)
-                print(parsed_record)
                     
                 top_parsed_records.add(parsed_record)
-                print(top_parsed_records)
 
             except (InadequateColumnsInCSVRecordException, InvalidDataToCreateRecordException) as e:
                 print(f'An error occurred: {e}')
 
     # output as yaml
-    print(top_parsed_records)
     top_parsed_records = list(top_parsed_records)
+    yaml_str = yaml.dump(top_parsed_records)
+    print(yaml_str)
+
 
 if __name__ == "__main__":
     main()

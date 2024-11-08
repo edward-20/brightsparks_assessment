@@ -48,7 +48,6 @@ def setup_data():
             'summary': '"CWN"'
         }
     )
-    d 
     return {
         'a': a,
         'b': b,

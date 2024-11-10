@@ -47,7 +47,7 @@ class Record:
 
         self._firstname = record['firstname']
         self._lastname = record['lastname']
-        self._summary = record['summary']
+        self._summary = record['summary'][1:-1]
 
     def __gt__(self, other: "Record"):
         '''
@@ -140,3 +140,9 @@ class Record:
 
     def __str__(self) -> str:
         return f"{self._firstname}, {self._lastname}"
+    
+    def convert_to_yaml_compatible_dictionary(self) -> dict:
+        return {
+            'name': f"{self._firstname} {self._lastname}",
+            'details': f"In division {self._division} from {self._date.strftime('%Y-%m-%d')} performing {self._summary}"
+        }

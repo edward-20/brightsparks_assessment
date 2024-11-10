@@ -80,8 +80,8 @@ def main():
                 print(f'An error occurred: {e}')
 
     # output as yaml
-    top_parsed_records = list(top_parsed_records)
-    yaml_str = yaml.dump(top_parsed_records)
+    top_parsed_records = [d.convert_to_yaml_compatible_dictionary() for d in list(top_parsed_records)]
+    yaml_str = yaml.dump({'records': top_parsed_records})
     print(yaml_str)
 
 

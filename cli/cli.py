@@ -3,11 +3,12 @@ CLI Tool main
 '''
 
 import argparse
+import yaml
 from cli.csv_parse import parse_header, parse_record, \
       InadequateColumnsInCSVRecordException, IncorrectHeadersInCSVException
 from cli.record import InvalidDataToCreateRecordException, Record
 from cli.top_n_list import TopNList
-import yaml
+from cli.valid_args import valid_count, valid_filename
 
 def main():
     '''
@@ -15,7 +16,7 @@ def main():
     '''
     # parse the command line arguments
     parser = argparse.ArgumentParser(
-        prog="CsvRecordsToYaml",
+        prog="csv_records_to_yaml",
         description='''
         Takes csv records of individual's performances and outputs to stdout the
         top c (default 3) performing individuals based on division and points.
@@ -23,11 +24,12 @@ def main():
         formatter_class=argparse.RawTextHelpFormatter
         )
 
-    parser.add_argument('filename')
+    parser.add_argument('filename', type=valid_filename)
     # how many individuals you want to output, default is 3
-    parser.add_argument('-c', '--count', help="the number of records you want to output", default=3)
+    parser.add_argument('-c', '--count', help="the number of records you want to output, must be greater than 1", default=3, type=valid_count)
     # sort by alternative field than division and points
-    parser.add_argument('-s', '--sort-by', action="append", choices=['firstname', 'lastname', 'date', 'division', 'points'],
+    parser.add_argument('-s', '--sort-by', action="append",
+    choices=['firstname', 'lastname', 'date', 'division', 'points'],
                         help='''
                         choose an alternative way to sort the records. Options include
                         - firstname

@@ -102,12 +102,19 @@ Division and points work as you would expect.
 
 ## Notes
 [] **Code style and commenting**.
+
 Declaration of private variables and then accessing them regardless.
 `Record` class uses variables to store attributes. Consider using a dictionary
 so that there isn't a need to convert Record instances to dictionary before yaml output.
+
 [x] **Unit Tests**.
+
 [x] Overall design and architecture.
+
 [x] Suitability of data structures and algorithms used.
+
 [x] Handling of edge cases.
+
 [x] Logging and error reporting.
+
 [x] Ease of build and deployment.

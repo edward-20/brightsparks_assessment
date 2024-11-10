@@ -4,7 +4,20 @@ points at certain duties, and outputs YAML of the top performing individuals by
 default but it can also be sorted by alternative means.
 
 ## Installation
-Clone the repository. Then build the package.
+Clone the repository. 
+```
+git clone git@github.com:edward-20/brightsparks_assessment.git
+```
+Create and activate a virtual environment. 
+```
+python3 -m venv venv
+source venv/bin/activate
+```
+Install the necessary dependencies.
+```
+python3 -m pip install -r requirements.txt
+```
+Then build the cli (it is a package).
 ```
 python3 -m build
 ```

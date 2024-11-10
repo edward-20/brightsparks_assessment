@@ -1,5 +1,8 @@
+'''
+Fixtures used for tests
+'''
 import pytest
-from cli.record import Record
+from src.cli.record import Record
 
 @pytest.fixture
 def alphabet_ordering_wrt_division_and_points():

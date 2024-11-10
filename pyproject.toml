@@ -1,0 +1,14 @@
+[project]
+name="brightsparks-csv-to-yml"
+description="CLI tool that takes in a csv file, detailing records of individuals and their points at certain duties, and outputs YAML of the top performing individuals by default but it can also be sorted by alternative means."
+dynamic = ["version"]
+
+[project.scripts]
+brightsparks-csv-to-yml = "cli.cli:main"
+
+[build-system]
+requires = ["setuptools >= 61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where=["src"]

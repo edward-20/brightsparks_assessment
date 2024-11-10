@@ -4,9 +4,15 @@ points at certain duties, and outputs YAML of the top performing individuals by
 default but it can also be sorted by alternative means.
 
 ## Installation
+Clone the repository. Then build the package.
+```
+python3 -m build
+```
+Then install it.
 ```
 pip install -e .
 ```
+You should now have `brightsparks-csv-to-yaml` as a command line tool.
 
 ## How to Use
 The CSV file contains the following columns:

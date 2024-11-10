@@ -2,7 +2,7 @@
 Test that the top n list has the correct behaviour after adding elements to the list
 '''
 
-from cli.top_n_list import TopNList
+from src.cli.top_n_list import TopNList
 
 def test_add_one(alphabet_ordering_wrt_division_and_points):
     '''

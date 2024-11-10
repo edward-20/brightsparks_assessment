@@ -2,7 +2,7 @@
 test Record class has correct behaviour for methods and operators
 '''
 
-from cli.record import Record
+from src.cli.record import Record
 
 def test_record_comparison(alphabet_ordering_wrt_division_and_points):
     '''

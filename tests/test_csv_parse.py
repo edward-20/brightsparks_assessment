@@ -2,7 +2,7 @@
 test parsing
 '''
 from datetime import datetime
-from cli.csv_parse import parse_header, parse_record
+from src.cli.csv_parse import parse_header, parse_record
 
 def test_verify_header_row():
     '''
